@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "nrql2nerd"
+require "optparse"
+require "json"
+
+options = {}
+api_key = nil
+account_id = nil
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: nrql2nerd [options]"
+
+  opts.on("-q", "--query QUERY", "NRQL query string") do |q|
+    options[:query] = q
+  end
+
+  opts.on("--api-key KEY", "New Relic API key") do |key|
+    api_key = key
+  end
+
+  opts.on("--account-id ID", "New Relic account ID") do |id|
+    account_id = id
+  end
+
+  opts.on("-h", "--help", "Prints this help") do
+    puts opts
+    exit
+  end
+end.parse!
+
+if options[:query]
+  client = NRQL2Nerd::Client.new(api_key: api_key, account_id: account_id)
+  result = client.run_query(options[:query])
+  puts JSON.pretty_generate(result)
+else
+  puts "Error: Query is required. Use -q or --query to specify the NRQL query."
+  exit 1
+end
