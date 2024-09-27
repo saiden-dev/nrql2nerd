@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nrql2nerd (0.1.0)
+    nrql2nerd (0.1.0a)
 
 GEM
   remote: https://rubygems.org/
