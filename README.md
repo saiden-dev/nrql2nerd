@@ -1,59 +1,95 @@
 # NRQL2Nerd
+
 [![Ruby](https://github.com/aladac/nrql2nerd/actions/workflows/main.yml/badge.svg)](https://github.com/aladac/nrql2nerd/actions/workflows/main.yml)
 [![Gem Version](https://badge.fury.io/rb/nrql2nerd.svg)](https://badge.fury.io/rb/nrql2nerd)
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
 
-This gem is a very simple lib which allows to directly execute `NRQL` queries on New Relic using the Nerd Graph API.
+A lightweight Ruby gem for executing NRQL queries against New Relic's NerdGraph API. Skip the boilerplate and get straight to your data.
+
+## Features
+
+- Simple, intuitive API for NRQL queries
+- Works as a library or command-line tool
+- Environment variable or explicit credential configuration
+- Returns parsed JSON results ready for use
 
 ## Installation
 
-Install the gem and add to the application's Gemfile by executing:
-
-    $ bundle add nrql2nerd
-
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-    $ gem install nrql2nerd
-
-## Usage
-### As a lib
+Add to your Gemfile:
 
 ```ruby
-NRQL2Nerd.run_query("SELECT * from AjaxRequest where requestUrl like '%api%' LIMIT MAX")
+gem "nrql2nerd"
+```
 
-# => [
-#  {
-#    "appId"=>12345,
-#    "message"=>"Some Message"
-#    ...
-#  }
-#]
+Or install directly:
+
+```bash
+gem install nrql2nerd
 ```
-### As a command line tool
+
+## Configuration
+
+Set your New Relic credentials via environment variables:
+
+```bash
+export NEW_RELIC_API_KEY="your-api-key"
+export NEW_RELIC_ACCOUNT_ID="your-account-id"
 ```
-$ nrql2nerd "SELECT * from AjaxRequest where requestUrl like '%api%' LIMIT MAX"
-[
-  {
-    "appId"=>12345,
-    "message"=>"Some Message"
-    ...
-  }
-]
+
+Or pass them explicitly when creating a client.
+
+## Usage
+
+### As a Library
+
+```ruby
+require "nrql2nerd"
+
+client = NRQL2Nerd::Client.new
+results = client.run_query("SELECT count(*) FROM Transaction SINCE 1 hour ago")
+
+# => [{"count" => 42}]
+```
+
+With explicit credentials:
+
+```ruby
+client = NRQL2Nerd::Client.new(
+  api_key: "your-api-key",
+  account_id: "12345"
+)
+```
+
+### Command Line
+
+```bash
+# Using environment variables
+nrql2nerd -q "SELECT count(*) FROM Transaction SINCE 1 hour ago"
+
+# With explicit credentials
+nrql2nerd -q "SELECT * FROM Transaction LIMIT 10" \
+  --api-key your-api-key \
+  --account-id 12345
+```
+
+A shorter alias `n2n` is also available:
+
+```bash
+n2n -q "SELECT count(*) FROM PageView SINCE 1 day ago"
 ```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```bash
+bin/setup          # Install dependencies
+bundle exec rake   # Run tests and linting
+bin/console        # Interactive prompt
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/aladac/nrql2nerd. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/nrql2nerd/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on [GitHub](https://github.com/aladac/nrql2nerd). Please follow the [code of conduct](https://github.com/aladac/nrql2nerd/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the NRQL2Nerd project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/nrql2nerd/blob/main/CODE_OF_CONDUCT.md).
+Available as open source under the [MIT License](https://opensource.org/licenses/MIT).
