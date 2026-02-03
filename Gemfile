@@ -11,4 +11,5 @@ gem "rspec", "~> 3.13.0"
 gem "rubocop", "~> 1.66.1"
 gem "rubocop-rake", "~> 0.6.0"
 gem "rubocop-rspec", "~> 3.0"
+gem "simplecov", "~> 0.22", require: false
 gem "webmock", "~> 3.23"

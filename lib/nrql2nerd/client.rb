@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module NRQL2Nerd
-  class Error < StandardError; end
-
   class Client
     def initialize(api_key: nil, account_id: nil)
       @api_key = ENV.fetch("NEW_RELIC_API_KEY", api_key)

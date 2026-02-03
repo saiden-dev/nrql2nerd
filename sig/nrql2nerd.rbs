@@ -1,4 +1,20 @@
 module NRQL2Nerd
   VERSION: String
-  # See the writing guide of rbs: https://github.com/ruby/rbs#guides
+
+  class Error < StandardError
+  end
+
+  class Client
+    @api_key: String
+    @account_id: String
+
+    def initialize: (?api_key: String?, ?account_id: String?) -> void
+    def graphql_nrql_query: (String query) -> String
+    def graphql_hash: (String query) -> Hash[Symbol, String]
+    def prepare_query: (String query) -> String
+    def client: () -> Net::HTTP
+    def uri: () -> URI::HTTPS
+    def make_query_request: (String query) -> Net::HTTPResponse
+    def run_query: (String query) -> Array[Hash[String, untyped]]?
+  end
 end
