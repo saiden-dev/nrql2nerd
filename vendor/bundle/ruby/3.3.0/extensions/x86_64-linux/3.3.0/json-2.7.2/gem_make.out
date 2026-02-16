@@ -1,0 +1,16 @@
+current directory: /home/runner/work/nrql2nerd/nrql2nerd/vendor/bundle/ruby/3.3.0/gems/json-2.7.2/ext/json
+/opt/hostedtoolcache/Ruby/3.3.10/x64/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/runner/work/nrql2nerd/nrql2nerd/vendor/bundle/ruby/3.3.0/gems/json-2.7.2/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20260212-2240-ara46g sitelibdir\=./.gem.20260212-2240-ara46g clean
+
+current directory: /home/runner/work/nrql2nerd/nrql2nerd/vendor/bundle/ruby/3.3.0/gems/json-2.7.2/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20260212-2240-ara46g sitelibdir\=./.gem.20260212-2240-ara46g
+make: Nothing to be done for 'all'.
+
+current directory: /home/runner/work/nrql2nerd/nrql2nerd/vendor/bundle/ruby/3.3.0/gems/json-2.7.2/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20260212-2240-ara46g sitelibdir\=./.gem.20260212-2240-ara46g install
+
+current directory: /home/runner/work/nrql2nerd/nrql2nerd/vendor/bundle/ruby/3.3.0/gems/json-2.7.2/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20260212-2240-ara46g sitelibdir\=./.gem.20260212-2240-ara46g clean
